@@ -120,6 +120,34 @@
       .tab-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
       .tab-btn[hidden] { display: none; }
       .tab-off { display: none !important; }
+      /* ===== PC用サイドメニュー（広幅のみ・狭幅では出さない） ===== */
+      .sidenav { display: none; }
+      @media (min-width: 1024px) {
+        .layout { display: flex; align-items: stretch; gap: 28px; max-width: 1312px; margin: 0 auto; padding: 0 16px; }
+        main { flex: 1 1 auto; min-width: 0; margin: 0; padding-left: 0; padding-right: 0; }
+        .sidenav { display: block; flex: 0 0 216px; width: 216px; padding: 28px 0 24px; }
+        .sidenav-inner {
+          position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto;
+          background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 10px;
+        }
+        .tabnav { display: none; }
+      }
+      .side-cat {
+        font-size: .8rem; font-weight: 900; color: var(--ink-2); letter-spacing: .06em;
+        margin: 16px 0 6px; padding: 0 6px;
+      }
+      .side-group:first-child .side-cat { margin-top: 2px; }
+      .side-btn {
+        display: block; width: 100%; text-align: left; min-height: 44px;
+        border: 1px solid transparent; border-radius: 8px; background: transparent;
+        color: var(--ink-2); font: inherit; font-weight: 700; font-size: .95rem;
+        cursor: pointer; padding: 8px 12px; margin-bottom: 2px; white-space: nowrap;
+        touch-action: manipulation; -webkit-tap-highlight-color: rgba(14, 107, 79, .18);
+        user-select: none; -webkit-user-select: none;
+      }
+      .side-btn:hover { border-color: var(--accent); color: var(--ink); }
+      .side-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .side-btn[hidden] { display: none; }
       .card {
         background: var(--surface); border: 1px solid var(--line);
         border-radius: 10px; padding: 18px;
@@ -551,6 +579,31 @@
     </style>
   </head>
   <body>
+    <div class="layout">
+      <aside class="sidenav" id="sideNav">
+        <nav class="sidenav-inner" role="tablist" aria-label="表示する内容の切替（サイドメニュー）">
+          <div class="side-group">
+            <div class="side-cat">計算</div>
+            <button type="button" class="side-btn active" data-target-tab="calc" data-cat="cat-calc" role="tab" aria-selected="true">計算</button>
+            <button type="button" class="side-btn" data-target-tab="rank" data-cat="cat-calc" role="tab" aria-selected="false">ランキング</button>
+            <button type="button" class="side-btn" id="sideBtnHist" data-target-tab="hist" data-cat="cat-calc" role="tab" aria-selected="false">年別</button>
+            <button type="button" class="side-btn" data-target-tab="pension" data-cat="cat-calc" role="tab" aria-selected="false">年金</button>
+          </div>
+          <div class="side-group">
+            <div class="side-cat">社会データ</div>
+            <button type="button" class="side-btn" data-target-tab="intl" data-cat="cat-data" role="tab" aria-selected="false">国際比較</button>
+            <button type="button" class="side-btn" data-target-tab="budget" data-cat="cat-data" role="tab" aria-selected="false">国の予算</button>
+            <button type="button" class="side-btn" data-target-tab="pop" data-cat="cat-data" role="tab" aria-selected="false">人口</button>
+            <button type="button" class="side-btn" data-target-tab="labor" data-cat="cat-data" role="tab" aria-selected="false">労働</button>
+            <button type="button" class="side-btn" data-target-tab="politics" data-cat="cat-data" role="tab" aria-selected="false">政治</button>
+            <button type="button" class="side-btn" data-target-tab="energy" data-cat="cat-data" role="tab" aria-selected="false">エネルギー</button>
+          </div>
+          <div class="side-group">
+            <div class="side-cat">出典</div>
+            <button type="button" class="side-btn" data-target-tab="sources" data-cat="cat-sources" role="tab" aria-selected="false">出典</button>
+          </div>
+        </nav>
+      </aside>
     <main>
       <h1>でーたけんきゅうじょ</h1>
       <p class="subtitle">年収と税金の計算／年金／国の予算／人口／労働／政治／エネルギーのデータ集と出典一覧</p>
@@ -2011,6 +2064,7 @@
         <p>掲載しているデータは公式資料に基づいていますが、転記の誤りなどを含む可能性があります。正確な情報は各出典の公式資料をご確認ください。計算結果は概算であり、実際の税額・保険料・給付額とは異なります。</p>
       </div>
     </main>
+    </div>
 
     <script>
       (function () {
@@ -4898,6 +4952,10 @@
         // 1行・横スクロールで出す。分類を切り替えると、その分類で最後に開いていた
         // タブ（初回は先頭）に戻る。分類の対応は各タブボタンの data-cat 属性で持つ。
         var catBtns = document.querySelectorAll('.cat-btn');
+        // PC用サイドメニュー（広幅のみ表示）。上部タブと同じ data-target-tab を持ち、
+        // 切替状態（activeTab）を共有する。全分類を常時表示するので、分類による
+        // hidden 制御は受けず、自営業モードで「年別」を隠す条件だけ上部タブと揃える。
+        var sideBtns = document.querySelectorAll('.side-btn');
         var tabCatOf = {};
         for (var ci = 0; ci < tabBtns.length; ci++) {
           tabCatOf[tabBtns[ci].getAttribute('data-target-tab')] = tabBtns[ci].getAttribute('data-cat');
@@ -4974,6 +5032,14 @@
             catBtns[k].classList.toggle('active', catOn);
             catBtns[k].setAttribute('aria-selected', catOn ? 'true' : 'false');
           }
+          // サイドメニュー側のアクティブ表示も同じ activeTab に同期する
+          for (var s = 0; s < sideBtns.length; s++) {
+            var sTarget = sideBtns[s].getAttribute('data-target-tab');
+            var sOn = sTarget === activeTab;
+            sideBtns[s].classList.toggle('active', sOn);
+            sideBtns[s].setAttribute('aria-selected', sOn ? 'true' : 'false');
+            sideBtns[s].hidden = (sTarget === 'hist' && typeof workMode !== 'undefined' && workMode === 'self');
+          }
           // アクティブなタブボタンが横スクロールの見える範囲に入るように寄せる
           var bar = document.getElementById('tabBar');
           var activeBtn = document.querySelector('.tab-btn.active');
@@ -4999,6 +5065,14 @@
               applyTabs();
             });
           })(tabBtns[t]);
+        }
+        for (var u = 0; u < sideBtns.length; u++) {
+          (function (b) {
+            b.addEventListener('click', function () {
+              activeTab = b.getAttribute('data-target-tab');
+              applyTabs();
+            });
+          })(sideBtns[u]);
         }
         for (var c = 0; c < catBtns.length; c++) {
           (function (b) {
