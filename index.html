@@ -168,6 +168,27 @@
       .side-btn:hover { border-color: var(--accent); color: var(--ink); }
       .side-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
       .side-btn[hidden] { display: none; }
+      /* ===== サイドバー内サブタブ（アクティブなタブの配下だけ展開するアコーディオン） ===== */
+      .side-btn.has-subs { position: relative; padding-right: 28px; }
+      .side-btn.has-subs::after {
+        content: ""; position: absolute; right: 12px; top: 50%;
+        width: 7px; height: 7px; margin-top: -6px;
+        border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+        transform: rotate(-45deg); opacity: .65;
+      }
+      .side-btn.has-subs.sub-open::after { transform: rotate(45deg); margin-top: -3px; }
+      .side-subs { margin: 2px 0 8px; padding-left: 26px; }
+      .side-subs[hidden] { display: none; }
+      .side-sub-btn {
+        display: block; width: 100%; text-align: left; min-height: 36px;
+        border: 1px solid transparent; border-radius: 6px; background: transparent;
+        color: var(--ink-2); font: inherit; font-weight: 600; font-size: .85rem;
+        cursor: pointer; padding: 6px 10px; margin-bottom: 1px; white-space: nowrap;
+        touch-action: manipulation; -webkit-tap-highlight-color: rgba(14, 107, 79, .18);
+        user-select: none; -webkit-user-select: none;
+      }
+      .side-sub-btn:hover { border-color: var(--accent); color: var(--ink); }
+      .side-sub-btn.active { background: var(--surface-2); border-color: var(--line); color: var(--accent); font-weight: 700; }
       .card {
         background: var(--surface); border: 1px solid var(--line);
         border-radius: 10px; padding: 18px;
@@ -624,19 +645,62 @@
         <nav class="sidenav-inner" role="tablist" aria-label="表示する内容の切替（サイドメニュー）">
           <div class="side-group">
             <div class="side-cat">計算</div>
-            <button type="button" class="side-btn active" data-target-tab="calc" data-cat="cat-calc" role="tab" aria-selected="true">計算</button>
-            <button type="button" class="side-btn" data-target-tab="rank" data-cat="cat-calc" role="tab" aria-selected="false">ランキング</button>
+            <button type="button" class="side-btn has-subs active" data-target-tab="calc" data-cat="cat-calc" role="tab" aria-selected="true" aria-expanded="true">計算</button>
+            <div class="side-subs" data-side-subs="calc">
+              <button type="button" class="side-sub-btn active" data-side-subtab="main" aria-selected="true">メイン計算</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="vat" aria-selected="false">消費税の目安</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="employer" aria-selected="false">会社負担</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="furusato" aria-selected="false">ふるさと納税</button>
+            </div>
+            <button type="button" class="side-btn has-subs" data-target-tab="rank" data-cat="cat-calc" role="tab" aria-selected="false" aria-expanded="false">ランキング</button>
+            <div class="side-subs" data-side-subs="rank" hidden>
+              <button type="button" class="side-sub-btn active" data-side-rank="region" data-side-value="jp" aria-selected="true">日本</button>
+              <button type="button" class="side-sub-btn" data-side-rank="region" data-side-value="world" aria-selected="false">世界</button>
+              <button type="button" class="side-sub-btn active" data-side-rank="local" data-side-value="kenpo" aria-selected="true">健保（都道府県）</button>
+              <button type="button" class="side-sub-btn" data-side-rank="local" data-side-value="kokuho" aria-selected="false">国保（主要都市）</button>
+            </div>
             <button type="button" class="side-btn" id="sideBtnHist" data-target-tab="hist" data-cat="cat-calc" role="tab" aria-selected="false">年別</button>
-            <button type="button" class="side-btn" data-target-tab="pension" data-cat="cat-calc" role="tab" aria-selected="false">年金</button>
+            <button type="button" class="side-btn has-subs" data-target-tab="pension" data-cat="cat-calc" role="tab" aria-selected="false" aria-expanded="false">年金</button>
+            <div class="side-subs" data-side-subs="pension" hidden>
+              <button type="button" class="side-sub-btn active" data-side-subtab="estimate" aria-selected="true">試算</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="history" aria-selected="false">保険料と受給額の推移</button>
+            </div>
           </div>
           <div class="side-group">
             <div class="side-cat">社会データ</div>
             <button type="button" class="side-btn" data-target-tab="intl" data-cat="cat-data" role="tab" aria-selected="false">国際比較</button>
-            <button type="button" class="side-btn" data-target-tab="budget" data-cat="cat-data" role="tab" aria-selected="false">国の予算</button>
-            <button type="button" class="side-btn" data-target-tab="pop" data-cat="cat-data" role="tab" aria-selected="false">人口</button>
-            <button type="button" class="side-btn" data-target-tab="labor" data-cat="cat-data" role="tab" aria-selected="false">労働</button>
-            <button type="button" class="side-btn" data-target-tab="politics" data-cat="cat-data" role="tab" aria-selected="false">政治</button>
-            <button type="button" class="side-btn" data-target-tab="energy" data-cat="cat-data" role="tab" aria-selected="false">エネルギー</button>
+            <button type="button" class="side-btn has-subs" data-target-tab="budget" data-cat="cat-data" role="tab" aria-selected="false" aria-expanded="false">国の予算</button>
+            <div class="side-subs" data-side-subs="budget" hidden>
+              <button type="button" class="side-sub-btn active" data-side-subtab="main" aria-selected="true">省庁別予算</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="tax" aria-selected="false">税収の内訳</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="taxhist" aria-selected="false">税収の推移</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="burden" aria-selected="false">国民負担率</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="benefit" aria-selected="false">社会保障給付費</button>
+            </div>
+            <button type="button" class="side-btn has-subs" data-target-tab="pop" data-cat="cat-data" role="tab" aria-selected="false" aria-expanded="false">人口</button>
+            <div class="side-subs" data-side-subs="pop" hidden>
+              <button type="button" class="side-sub-btn active" data-side-subtab="total" aria-selected="true">総人口の推移</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="age" aria-selected="false">年齢構成</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="support" aria-selected="false">支える構造</button>
+            </div>
+            <button type="button" class="side-btn has-subs" data-target-tab="labor" data-cat="cat-data" role="tab" aria-selected="false" aria-expanded="false">労働</button>
+            <div class="side-subs" data-side-subs="labor" hidden>
+              <button type="button" class="side-sub-btn active" data-side-subtab="overtime" aria-selected="true">残業時間</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="sales" aria-selected="false">売上高</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="salary" aria-selected="false">平均年収</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="holiday" aria-selected="false">年間休日数</button>
+            </div>
+            <button type="button" class="side-btn has-subs" data-target-tab="politics" data-cat="cat-data" role="tab" aria-selected="false" aria-expanded="false">政治</button>
+            <div class="side-subs" data-side-subs="politics" hidden>
+              <button type="button" class="side-sub-btn active" data-side-subtab="seats" aria-selected="true">議席数</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="subsidy" aria-selected="false">政党交付金</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="turnout" aria-selected="false">投票率</button>
+            </div>
+            <button type="button" class="side-btn has-subs" data-target-tab="energy" data-cat="cat-data" role="tab" aria-selected="false" aria-expanded="false">エネルギー</button>
+            <div class="side-subs" data-side-subs="energy" hidden>
+              <button type="button" class="side-sub-btn active" data-side-subtab="selfsuff" aria-selected="true">自給率</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="power" aria-selected="false">発電と消費</button>
+            </div>
           </div>
           <div class="side-group">
             <div class="side-cat">出典</div>
@@ -5646,6 +5710,88 @@
             if (initial) applySubtab(tab, initial.getAttribute('data-subtab'));
           })(bars[bi]);
         }
+      })();
+    </script>
+    <script>
+      // ===== サイドバーのサブタブ展開（PC幅のみ表示されるサイドメニュー用） =====
+      // アクティブなタブの配下にあるサブタブ一覧だけを、インデント付きで展開する。
+      // 状態の正本は本文側（タブ切替の .side-btn.active とサブタブバーの .subtab-btn.active、
+      // ランキングは 日本／世界・健保／国保 トグルの .active）で、ここはそれを読むだけ。
+      // サイドバーのサブ項目クリックは、対応する本文側ボタンの click() を呼んで既存の
+      // 切替処理に任せる（表示状態を作り直したりはしない）。
+      // タブ切替は上部タブ・分類ボタン・自営業モード連動など複数経路から起きるため、
+      // 関係要素の class 変化を MutationObserver で監視してハイライトと展開を追従させる。
+      (function () {
+        var sideNav = document.getElementById('sideNav');
+        if (!sideNav) return;
+        var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function markGroup(btns, attr, val) {
+          for (var j = 0; j < btns.length; j++) {
+            var on = btns[j].getAttribute(attr) === val;
+            btns[j].classList.toggle('active', on);
+            btns[j].setAttribute('aria-selected', on ? 'true' : 'false');
+          }
+        }
+        function syncSideSubs() {
+          var activeBtn = sideNav.querySelector('.side-btn.active');
+          var tab = activeBtn ? activeBtn.getAttribute('data-target-tab') : null;
+          var lists = sideNav.querySelectorAll('[data-side-subs]');
+          for (var i = 0; i < lists.length; i++) {
+            var t = lists[i].getAttribute('data-side-subs');
+            var open = t === tab;
+            lists[i].hidden = !open;
+            var parentBtn = sideNav.querySelector('.side-btn[data-target-tab="' + t + '"]');
+            if (parentBtn) {
+              parentBtn.classList.toggle('sub-open', open);
+              parentBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+            if (!open) continue;
+            if (t === 'rank') {
+              var rt = document.querySelector('#rankToggle button.active');
+              var lt = document.querySelector('#localToggle button.active');
+              markGroup(lists[i].querySelectorAll('[data-side-rank="region"]'), 'data-side-value', rt ? rt.getAttribute('data-region') : null);
+              markGroup(lists[i].querySelectorAll('[data-side-rank="local"]'), 'data-side-value', lt ? lt.getAttribute('data-local') : null);
+            } else {
+              var bar = document.querySelector('[data-subtab-bar="' + t + '"]');
+              var ab = bar ? bar.querySelector('.subtab-btn.active') : null;
+              markGroup(lists[i].querySelectorAll('[data-side-subtab]'), 'data-side-subtab', ab ? ab.getAttribute('data-subtab') : null);
+            }
+          }
+        }
+
+        sideNav.addEventListener('click', function (e) {
+          var btn = e.target && e.target.closest ? e.target.closest('.side-sub-btn') : null;
+          if (!btn) return;
+          var list = btn.closest('[data-side-subs]');
+          if (!list) return;
+          var tab = list.getAttribute('data-side-subs');
+          if (tab === 'rank') {
+            var kind = btn.getAttribute('data-side-rank');
+            var toggle = document.getElementById(kind === 'region' ? 'rankToggle' : 'localToggle');
+            var target = toggle ? toggle.querySelector('button[data-' + kind + '="' + btn.getAttribute('data-side-value') + '"]') : null;
+            if (target) target.click();
+            var sec = document.getElementById(kind === 'region' ? 'rankSection' : 'localSection');
+            if (sec && typeof sec.scrollIntoView === 'function') sec.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          } else {
+            var bar = document.querySelector('[data-subtab-bar="' + tab + '"]');
+            var targetBtn = bar ? bar.querySelector('.subtab-btn[data-subtab="' + btn.getAttribute('data-side-subtab') + '"]') : null;
+            if (targetBtn) targetBtn.click();
+          }
+          syncSideSubs();
+        });
+
+        var watched = [];
+        var sels = ['.side-btn', '.subtab-btn', '#rankToggle button', '#localToggle button'];
+        for (var s = 0; s < sels.length; s++) {
+          var found = document.querySelectorAll(sels[s]);
+          for (var f = 0; f < found.length; f++) watched.push(found[f]);
+        }
+        var mo = new MutationObserver(function () { syncSideSubs(); });
+        for (var w = 0; w < watched.length; w++) {
+          mo.observe(watched[w], { attributes: true, attributeFilter: ['class'] });
+        }
+        syncSideSubs();
       })();
     </script>
   </body>
