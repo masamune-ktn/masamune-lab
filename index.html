@@ -120,6 +120,24 @@
       .tab-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
       .tab-btn[hidden] { display: none; }
       .tab-off { display: none !important; }
+      /* ===== サブタブ（タブ内のセクション切替・ピル型） ===== */
+      .subtab-bar { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 16px; }
+      .subtab-bar-top { margin-top: 16px; margin-bottom: 0; }
+      .subtab-btn {
+        min-height: 40px; border: 1px solid var(--line); border-radius: 999px;
+        background: var(--surface-2); color: var(--ink-2); font: inherit; font-weight: 700; font-size: .85rem;
+        cursor: pointer; padding: 6px 14px; white-space: nowrap;
+        touch-action: manipulation; -webkit-tap-highlight-color: rgba(14, 107, 79, .18);
+        user-select: none; -webkit-user-select: none;
+      }
+      .subtab-btn:hover { border-color: var(--accent); color: var(--ink); }
+      .subtab-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .subtab-off { display: none !important; }
+      .taxrev-svg .seg-inc { fill: var(--c-income); opacity: .88; }
+      .taxrev-svg .seg-corp { fill: var(--c-shaho); opacity: .85; }
+      .taxrev-svg .seg-vat { fill: var(--c-vat); opacity: .88; }
+      .taxrev-svg .seg-other { fill: var(--c-expense); opacity: .85; }
+      .taxrev-svg .bar-total { fill: var(--ink); font-size: 12px; font-weight: 700; font-family: "IBM Plex Mono", monospace; }
       /* ===== PC用サイドメニュー（広幅のみ・狭幅では出さない） ===== */
       .sidenav { display: none; }
       @media (min-width: 1024px) {
@@ -607,7 +625,7 @@
     <main>
       <h1>でーたけんきゅうじょ</h1>
       <p class="subtitle">年収と税金の計算／年金／国の予算／人口／労働／政治／エネルギーのデータ集と出典一覧</p>
-      <p class="lead" id="leadText">年収（額面）を入れるだけで、所得税・住民税・社会保険料と手取りの目安がわかります。ふるさと納税で自己負担2,000円で済む寄付上限の目安も、同じ入力から試算できます。買い物で払う消費税の概算や、会社が負担する社会保険料と総人件費もあわせて試算できます。会社員では、年収が給与所得者の中で上位何%かもわかります。年代別（年齢階層別）の平均年収と、自分の年収を比べる表示もあります。世界全体の所得分布での位置や、アメリカ・ドイツ・韓国など主要国の賃金分布の中で上位何%に入るかも比べられます。年収階級別の人数（分布）は2008年・2013年・2019年・2024年の各年の統計に切り替えて比べられます。また、同じ年収のまま2008年（平成20年）〜2026年（令和8年）の各年の制度で計算し直した「年別の手取り」もグラフで見られます。財務省・OECDの統計による主要国との「国際比較」（国民負担率と税ウェッジ）も載せています。働き方で「自営業・個人事業主」を選ぶと、売上・経費から事業所得・国民年金・国民健康保険・個人事業税と手残りを試算できます。「年金」タブでは、今の年収のまま働き続けた場合に65歳から受け取る老齢年金の目安も試算できます。年金保険料の推移（厚生年金保険料率と国民年金保険料の月額、2004年〜2026年）と、受け取る側の老齢基礎年金・満額（年額）の推移もグラフで確認できます。「国の予算」タブでは、一般会計予算の歳入の内訳と省庁別の歳出を一覧でき、年度を切り替えて2010年度・2015年度・2020年度・2025年度・2026年度の当初予算（総額は92.3兆円〜122.3兆円）を比べられます。歳入のうち税収については、消費税・所得税・法人税など税目別の内訳も年度ごとに表示されます。同じタブには、税金と社会保険料を合わせた国民負担率（対国民所得比）の1970年度〜2026年度の推移グラフも載せています。さらに、社会保障給付費（年金・医療・福祉その他の3区分）の1990年度〜2024年度の推移も積み上げグラフで載せています。「人口」タブでは、総人口の推移と将来推計（1970年〜2070年）、年齢3区分（年少・生産年齢・老年）の構成と高齢化率の変化、生産年齢人口何人で高齢者1人を支える構造かも載せています。「労働」タブでは、厚生労働省「毎月勤労統計調査」による産業別の残業時間（所定外労働時間・1人平均月間）の2010年〜2025年の推移を、産業を切り替える折れ線グラフと、年度を切り替えて見られる産業別ランキング（2010年〜2025年）で載せています。あわせて、財務省「法人企業統計調査」による産業別の売上高ランキング（2015年度・2020年度・2024年度）と、国税庁「民間給与実態統計調査」による産業別の平均年収ランキング（2019年分・2024年分）も、年度を切り替えて見られます。さらに、厚生労働省「就労条件総合調査」（令和7年調査）による産業別の年間休日数ランキング（労働者1人平均、全産業平均116.6日）も載せています。「政治」タブでは、衆議院議員総選挙ごとの政党別獲得議席数（1990年〜2024年の12回）の推移を、政党別に色分けした積み上げグラフと、選挙ごとの年表形式の数値表で載せています。あわせて、税金から政党に配られる政党交付金の政党別交付額（2015年・2020年・2025年）も、年を切り替える横棒グラフと表で載せています。さらに、衆議院総選挙と参議院通常選挙の投票率の推移（戦後〜最新、衆院選は1946年〜2026年・参院選は1947年〜2025年）を2系列の折れ線グラフと選挙ごとの数値表で載せ、2024年衆議院総選挙については総務省の抽出調査による年代別投票率（10歳刻み）も棒グラフで載せています。「エネルギー」タブでは、日本の発電電力量と電源構成（火力・原子力・水力・再生可能エネルギー）の推移を、資源エネルギー庁「総合エネルギー統計」に基づき、東日本大震災の前（2010年度）から2024年度まで、電源別の積み上げグラフと表で載せています。発電した電気が産業・業務・家庭・運輸のどの部門で使われたか（電力の最終消費）も、同じ年度について部門別の積み上げグラフと表で載せています。発電量と最終消費の差（ロス・所内消費など）も、年度ごとの電力量と発電量に対する割合で載せています。あわせて、一次エネルギー自給率の推移（1990年度〜2024年度、IEAベース。震災前の約20%から2014年度に過去最低の6.3%まで落ち、2024年度は16.3%）も、折れ線グラフと表で載せています。「出典」タブでは、サイト全体で使っている統計・公表資料をタブごとにまとめ、発行機関・資料名と使っているデータの一覧が見られます。</p>
+      <p class="lead" id="leadText">年収（額面）を入れるだけで、所得税・住民税・社会保険料と手取りの目安がわかります。ふるさと納税で自己負担2,000円で済む寄付上限の目安も、同じ入力から試算できます。買い物で払う消費税の概算や、会社が負担する社会保険料と総人件費もあわせて試算できます。会社員では、年収が給与所得者の中で上位何%かもわかります。年代別（年齢階層別）の平均年収と、自分の年収を比べる表示もあります。世界全体の所得分布での位置や、アメリカ・ドイツ・韓国など主要国の賃金分布の中で上位何%に入るかも比べられます。年収階級別の人数（分布）は2008年・2013年・2019年・2024年の各年の統計に切り替えて比べられます。また、同じ年収のまま2008年（平成20年）〜2026年（令和8年）の各年の制度で計算し直した「年別の手取り」もグラフで見られます。財務省・OECDの統計による主要国との「国際比較」（国民負担率と税ウェッジ）も載せています。働き方で「自営業・個人事業主」を選ぶと、売上・経費から事業所得・国民年金・国民健康保険・個人事業税と手残りを試算できます。「年金」タブでは、今の年収のまま働き続けた場合に65歳から受け取る老齢年金の目安も試算できます。年金保険料の推移（厚生年金保険料率と国民年金保険料の月額、2004年〜2026年）と、受け取る側の老齢基礎年金・満額（年額）の推移もグラフで確認できます。「国の予算」タブでは、一般会計予算の歳入の内訳と省庁別の歳出を一覧でき、年度を切り替えて2010年度・2015年度・2020年度・2025年度・2026年度の当初予算（総額は92.3兆円〜122.3兆円）を比べられます。歳入のうち税収については、消費税・所得税・法人税など税目別の内訳も年度ごとに表示されます。税収の決算額の長期推移（1990年度〜2025年度、所得税・法人税・消費税・その他の積み上げ）もグラフで載せています。同じタブには、税金と社会保険料を合わせた国民負担率（対国民所得比）の1970年度〜2026年度の推移グラフも載せています。さらに、社会保障給付費（年金・医療・福祉その他の3区分）の1990年度〜2024年度の推移も積み上げグラフで載せています。「人口」タブでは、総人口の推移と将来推計（1970年〜2070年）、年齢3区分（年少・生産年齢・老年）の構成と高齢化率の変化、生産年齢人口何人で高齢者1人を支える構造かも載せています。「労働」タブでは、厚生労働省「毎月勤労統計調査」による産業別の残業時間（所定外労働時間・1人平均月間）の2010年〜2025年の推移を、産業を切り替える折れ線グラフと、年度を切り替えて見られる産業別ランキング（2010年〜2025年）で載せています。あわせて、財務省「法人企業統計調査」による産業別の売上高ランキング（2015年度・2020年度・2024年度）と、国税庁「民間給与実態統計調査」による産業別の平均年収ランキング（2019年分・2024年分）も、年度を切り替えて見られます。さらに、厚生労働省「就労条件総合調査」（令和7年調査）による産業別の年間休日数ランキング（労働者1人平均、全産業平均116.6日）も載せています。「政治」タブでは、衆議院議員総選挙ごとの政党別獲得議席数（1990年〜2024年の12回）の推移を、政党別に色分けした積み上げグラフと、選挙ごとの年表形式の数値表で載せています。あわせて、税金から政党に配られる政党交付金の政党別交付額（2015年・2020年・2025年）も、年を切り替える横棒グラフと表で載せています。さらに、衆議院総選挙と参議院通常選挙の投票率の推移（戦後〜最新、衆院選は1946年〜2026年・参院選は1947年〜2025年）を2系列の折れ線グラフと選挙ごとの数値表で載せ、2024年衆議院総選挙については総務省の抽出調査による年代別投票率（10歳刻み）も棒グラフで載せています。「エネルギー」タブでは、日本の発電電力量と電源構成（火力・原子力・水力・再生可能エネルギー）の推移を、資源エネルギー庁「総合エネルギー統計」に基づき、東日本大震災の前（2010年度）から2024年度まで、電源別の積み上げグラフと表で載せています。発電した電気が産業・業務・家庭・運輸のどの部門で使われたか（電力の最終消費）も、同じ年度について部門別の積み上げグラフと表で載せています。発電量と最終消費の差（ロス・所内消費など）も、年度ごとの電力量と発電量に対する割合で載せています。あわせて、一次エネルギー自給率の推移（1990年度〜2024年度、IEAベース。震災前の約20%から2014年度に過去最低の6.3%まで落ち、2024年度は16.3%）も、折れ線グラフと表で載せています。「出典」タブでは、サイト全体で使っている統計・公表資料をタブごとにまとめ、発行機関・資料名と使っているデータの一覧が見られます。</p>
       <div class="premise">
         <span>令和8年分</span>
         <span id="workChip">会社員・給与所得のみ</span>
@@ -699,7 +717,13 @@
         </div>
       </div>
 
-          <div class="card" data-tab="calc">
+          <div class="subtab-bar subtab-bar-top" data-tab="calc" data-subtab-bar="calc" role="tablist" aria-label="計算タブの表示切替">
+            <button type="button" class="subtab-btn active" data-subtab="main" role="tab" aria-selected="true">メイン計算</button>
+            <button type="button" class="subtab-btn" data-subtab="vat" role="tab" aria-selected="false">消費税の目安</button>
+            <button type="button" class="subtab-btn" data-subtab="employer" role="tab" aria-selected="false">会社負担</button>
+            <button type="button" class="subtab-btn" data-subtab="furusato" role="tab" aria-selected="false">ふるさと納税</button>
+          </div>
+          <div class="card" id="calcMainSection" data-tab="calc">
             <div class="takehome-label" id="takeLabel">手取り（年額）</div>
             <div class="takehome num"><span class="yen-mark">¥</span><span id="takeHome">0</span></div>
             <div class="sub-stats">
@@ -916,6 +940,10 @@
       </section>
 <section class="card" id="pensionSection" data-tab="pension">
             <h2>将来の年金目安</h2>
+            <div class="subtab-bar" data-subtab-bar="pension" role="tablist" aria-label="年金タブの表示切替">
+              <button type="button" class="subtab-btn active" data-subtab="estimate" role="tab" aria-selected="true">試算</button>
+              <button type="button" class="subtab-btn" data-subtab="history" role="tab" aria-selected="false">保険料と受給額の推移</button>
+            </div>
             <p class="hist-intro" id="penIntro">今の年収のまま働き続けた場合に、65歳から受け取れる老齢年金の目安です。年収は上の共通入力を使います。</p>
             <div class="hist-ctl" id="penControls">
               <div>
@@ -1013,7 +1041,7 @@
       </section>
 
 
-          <section class="card" data-tab="calc">
+          <section class="card" id="calcStepsSection" data-tab="calc">
             <h2>計算の流れ</h2>
             <ol class="steps" id="stepsEmployee">
               <li>
@@ -1081,7 +1109,7 @@
             </ol>
           </section>
 
-          <section class="card" data-tab="calc">
+          <section class="card" id="calcVatSection" data-tab="calc">
             <h2>消費税の概算</h2>
             <p class="vat-intro" id="vatIntro">消費税は買い物のたびに払う税金で、年収だけでは決まりません。手取りのうち実際に使う分から、1年間で払う消費税の目安を税込価格から逆算します。</p>
 
@@ -1338,7 +1366,13 @@
           </div>
           <div class="hist-diff" id="budgetYearDiff">–</div>
         </div>
-        
+        <div class="subtab-bar" data-subtab-bar="budget" role="tablist" aria-label="国の予算タブの表示切替">
+          <button type="button" class="subtab-btn active" data-subtab="main" role="tab" aria-selected="true">省庁別予算</button>
+          <button type="button" class="subtab-btn" data-subtab="tax" role="tab" aria-selected="false">税収の内訳</button>
+          <button type="button" class="subtab-btn" data-subtab="taxhist" role="tab" aria-selected="false">税収の推移</button>
+          <button type="button" class="subtab-btn" data-subtab="burden" role="tab" aria-selected="false">国民負担率</button>
+          <button type="button" class="subtab-btn" data-subtab="benefit" role="tab" aria-selected="false">社会保障給付費</button>
+        </div>
 
         <h3>歳入（入ってくるお金）</h3>
         <p class="intl-sub" id="budgetRevNote">歳入は省庁ごとに分かれておらず、国全体で一括して集められます。税金だけでは足りず、約4分の1は公債金（国の借金）でまかなわれています。</p>
@@ -1373,6 +1407,33 @@
         </div>
         
         
+
+        <h3>税収の推移（1990年度〜2025年度・決算）</h3>
+        <p class="intl-sub">一般会計の税収（租税及び印紙収入）の<b>決算額</b>の長期推移です。上の「歳入」「税収の内訳」が当初予算の姿なのに対し、こちらは各年度に実際に収納された決算額で統一しています。下から所得税・法人税・消費税・その他の積み上げで、バーの上の数字は代表年の税収合計（兆円）です。バブル期の1990年度に60.1兆円だった税収は、リーマン・ショック後の2009年度に38.7兆円まで落ち込み、2025年度には84.2兆円と過去最高になりました。消費税は1989年度に導入された税で、税率（国税・地方分合計）は1997年度に5%、2014年度に8%、2019年度に10%へ引き上げられています。</p>
+        <div class="intl-legend">
+          <span><span class="sw" style="background:var(--c-income)"></span>所得税</span>
+          <span><span class="sw" style="background:var(--c-shaho)"></span>法人税</span>
+          <span><span class="sw" style="background:var(--c-vat)"></span>消費税（国税分）</span>
+          <span><span class="sw" style="background:var(--c-expense)"></span>その他（相続税・酒税・関税・印紙収入など）</span>
+        </div>
+        <div class="hist-chart-wrap" id="taxRevChartWrap"></div>
+        <table class="pen-table">
+          <thead>
+            <tr><th scope="col">年度</th><th scope="col">所得税</th><th scope="col">法人税</th><th scope="col">消費税</th><th scope="col">その他</th><th scope="col">税収 合計</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1990年度</td><td class="num">259,955億円</td><td class="num">183,836億円</td><td class="num">46,227億円</td><td class="num">111,041億円</td><td class="num">601,059億円</td></tr>
+            <tr><td>1995年度</td><td class="num">195,151億円</td><td class="num">137,354億円</td><td class="num">57,901億円</td><td class="num">128,902億円</td><td class="num">519,308億円</td></tr>
+            <tr><td>2000年度</td><td class="num">187,889億円</td><td class="num">117,472億円</td><td class="num">98,221億円</td><td class="num">103,543億円</td><td class="num">507,125億円</td></tr>
+            <tr><td>2005年度</td><td class="num">155,859億円</td><td class="num">132,736億円</td><td class="num">105,834億円</td><td class="num">96,225億円</td><td class="num">490,654億円</td></tr>
+            <tr><td>2009年度</td><td class="num">129,139億円</td><td class="num">63,564億円</td><td class="num">98,075億円</td><td class="num">96,553億円</td><td class="num">387,331億円</td></tr>
+            <tr><td>2010年度</td><td class="num">129,844億円</td><td class="num">89,677億円</td><td class="num">100,333億円</td><td class="num">95,014億円</td><td class="num">414,868億円</td></tr>
+            <tr><td>2015年度</td><td class="num">178,071億円</td><td class="num">108,274億円</td><td class="num">174,263億円</td><td class="num">102,246億円</td><td class="num">562,854億円</td></tr>
+            <tr><td>2020年度</td><td class="num">191,898億円</td><td class="num">112,346億円</td><td class="num">209,714億円</td><td class="num">94,258億円</td><td class="num">608,216億円</td></tr>
+            <tr><td>2024年度</td><td class="num">212,086億円</td><td class="num">179,102億円</td><td class="num">250,212億円</td><td class="num">110,921億円</td><td class="num">752,321億円</td></tr>
+            <tr><td>2025年度</td><td class="num">252,565億円</td><td class="num">217,450億円</td><td class="num">260,278億円</td><td class="num">111,933億円</td><td class="num">842,226億円</td></tr>
+          </tbody>
+        </table>
 
         <h3>国民負担率の推移（1970年度〜2026年度）</h3>
         <p class="intl-sub">国民負担率は、国全体の税金（租税負担率）と社会保険料（社会保障負担率）の合計が国民所得（NI）の何%にあたるかを示す指標です。下段が税金、上段が社会保険料の積み上げで、一番上のラインが国民負担率（合計）です。年度切替の対象ではなく、1970年度から2026年度までの全期間を固定表示しています。</p>
@@ -1466,6 +1527,15 @@
         <h3 class="notes-h3">税収の内訳について</h3>
 <p class="intl-note" id="budgetTaxFeature">2026年度の特徴：揮発油税は前年度（2025年度）の19,760億円から9,720億円へほぼ半減しました。ガソリン税の当分の間税率（いわゆる暫定税率）が2025年末で廃止されたためです。また、防衛特別法人税（5,760億円）と防衛特別所得税（380億円）が新設された年度です。</p>
 <p class="intl-src" id="budgetTaxSource">出典：財務省「令和8年度租税及び印紙収入概算」（一般会計分・当初予算）。</p>
+        <h3 class="notes-h3">税収の推移について</h3>
+<ul class="intl-points">
+          <li>「税収の推移」はすべて<b>決算額</b>（各年度に実際に収納された額）です。このタブの他のセクション（歳入・税収の内訳・歳出）が<b>当初予算</b>なのと物差しが違うため、近い年度でも金額は一致しません。たとえば2025年度の決算は84.2兆円、2026年度の当初予算は83.7兆円です。</li>
+          <li>消費税は<b>国税分のみ</b>で、地方消費税は含まれません。税率の節目は、1989年度に3%で導入、1997年度に5%、2014年度に8%、2019年度に10%（軽減税率8%を併設）です。1997年度に消費税収が前年度の6.1兆円から9.3兆円へ跳ねたのは、国税分の税率が3%から4%へ上がったことが主因です。</li>
+          <li>1990年度の60.1兆円はバブル期のピークで、所得税が26.0兆円と全体の43.2%を占めていました。その後はバブル崩壊と景気の低迷で減り続け、リーマン・ショック後の2009年度に38.7兆円まで落ち込みました。法人税は2009年度に6.4兆円と、1989年度（19.0兆円）の約3分の1です。</li>
+          <li>2018年度に60.4兆円と1990年度の水準を回復し、2020年度以降は過去最高の更新が続いて2025年度は84.2兆円になりました。構成も大きく変わり、2025年度は消費税（26.0兆円）が最大の税目で、所得税25.3兆円・法人税21.7兆円と続きます。</li>
+          <li>「その他」は、税収総額から所得税・法人税・消費税を差し引いた額で、相続税・酒税・たばこ税・揮発油税・関税・印紙収入などが含まれます。</li>
+        </ul>
+<p class="intl-src">出典：財務省「昭和54年度以降の税収の推移」（税収に関する資料。一般会計税収・所得税収・法人税収・消費税収の決算額）。このページでは1990年度〜2025年度（令和7年度）を表示しています。</p>
         <h3 class="notes-h3">国民負担率の推移について</h3>
 <ul class="intl-points">
           <li>分母は<b>国民所得（NI）</b>です。給与（年収）に対する割合でも、GDPに対する割合でもありません。個人の手取り計算の負担率とは物差しが違うため、直接は比べられません。</li>
@@ -1496,6 +1566,11 @@
         <h2>人口</h2>
         <p class="intl-intro">日本の人口は2008年をピークに減少が続いています。総人口の推移と将来推計、年齢構成（年少・生産年齢・老年）の変化、そして「現役世代何人で高齢者1人を支える構造か」を見ます。このページの税金・年金の計算には影響しない、人口の長期統計です。</p>
 
+        <div class="subtab-bar" data-subtab-bar="pop" role="tablist" aria-label="人口タブの表示切替">
+          <button type="button" class="subtab-btn active" data-subtab="total" role="tab" aria-selected="true">総人口の推移</button>
+          <button type="button" class="subtab-btn" data-subtab="age" role="tab" aria-selected="false">年齢構成</button>
+          <button type="button" class="subtab-btn" data-subtab="support" role="tab" aria-selected="false">支える構造</button>
+        </div>
         <h3>総人口の推移と将来推計（1970年〜2070年）</h3>
         <p class="intl-sub">実線が実績（総務省「国勢調査」および「人口推計」、各年10月1日現在）、破線が将来推計です。推計は国立社会保障・人口問題研究所「日本の将来推計人口（令和5年推計）」の出生中位・死亡中位仮定（2020年国勢調査を基準人口とする推計）で、2025年以降を表示しています。</p>
         <div class="intl-legend">
@@ -1584,6 +1659,12 @@
         <h2>労働・残業時間</h2>
         <p class="intl-intro">仕事によって残業時間はどれだけ違うのか。厚生労働省「毎月勤労統計調査」の産業別・所定外労働時間（1人平均月間）で、2010年〜2025年の推移を見ます。このページの税金・年金の計算には影響しない、労働時間の長期統計です。</p>
 
+        <div class="subtab-bar" data-subtab-bar="labor" role="tablist" aria-label="労働タブの表示切替">
+          <button type="button" class="subtab-btn active" data-subtab="overtime" role="tab" aria-selected="true">残業時間</button>
+          <button type="button" class="subtab-btn" data-subtab="sales" role="tab" aria-selected="false">売上高</button>
+          <button type="button" class="subtab-btn" data-subtab="salary" role="tab" aria-selected="false">平均年収</button>
+          <button type="button" class="subtab-btn" data-subtab="holiday" role="tab" aria-selected="false">年間休日数</button>
+        </div>
         <h3>産業別の残業時間の推移（2010年〜2025年）</h3>
         <p class="intl-sub">「所定外労働時間」は、早出・残業・臨時の呼出・休日出勤など、所定の労働時間を超えて働いた時間で、公的統計でいう残業時間にあたります。事業所規模5人以上、一般労働者とパートタイム労働者を含む常用労働者（就業形態計）の1人平均月間です。産業を選ぶと、その産業の線（実線）と全産業平均＝調査産業計の線（破線）を重ねて比べられます。</p>
         <div class="hist-ctl">
@@ -1747,6 +1828,11 @@
         <h2>政治・政党別議席数、政党交付金と投票率</h2>
         <p class="intl-intro">衆議院議員総選挙のたびに、各政党が何議席を取ったのか。1990年（第39回）から2024年（第50回）までの12回の総選挙について、選挙結果時点の政党別獲得議席の推移を見ます。このページの税金・年金の計算には影響しない、選挙結果の長期統計です。中段では、税金から政党へ配られる政党交付金の内訳を、下段では衆議院総選挙・参議院通常選挙の投票率の推移と、年代別の投票率も載せています。</p>
 
+        <div class="subtab-bar" data-subtab-bar="politics" role="tablist" aria-label="政治タブの表示切替">
+          <button type="button" class="subtab-btn active" data-subtab="seats" role="tab" aria-selected="true">議席数</button>
+          <button type="button" class="subtab-btn" data-subtab="subsidy" role="tab" aria-selected="false">政党交付金</button>
+          <button type="button" class="subtab-btn" data-subtab="turnout" role="tab" aria-selected="false">投票率</button>
+        </div>
         <h3>政党別議席数の推移（衆議院総選挙・1990年〜2024年）</h3>
         <p class="intl-sub">各選挙の獲得議席を政党別に積み上げたグラフです。バーの上の数字はその選挙の定数です。小政党は「その他」にまとめ、無所属と合わせています（内訳は下の年表に全政党分を載せています）。1993年は自民党が過半数を割って非自民連立政権が誕生し、2009年は民主党308議席で政権交代、2024年は自民党が191議席まで減って少数与党になりました。</p>
         <div class="intl-legend" id="seatsLegend"></div>
@@ -1853,6 +1939,10 @@
         <h2>エネルギー・自給率と日本の発電電力量・電源構成</h2>
         <p class="intl-intro">日本はエネルギーの大半を輸入に頼っていて、一次エネルギー自給率は2024年度で16.3%です。まずその自給率の長期推移（1990年度〜2024年度）を載せ、続いて日本の電気は、どの電源でどれだけ作られているのか。資源エネルギー庁「総合エネルギー統計」に基づく発電電力量と電源構成の推移を、東日本大震災の前（2010年度）から2024年度まで載せています。あわせて、作られた電気が産業・業務・家庭・運輸のどの部門で使われたか（電力の最終消費）と、発電量と最終消費の差（ロス・所内消費など）も、同じ年度について載せています。このページの税金・年金の計算には影響しない、長期統計です。</p>
 
+        <div class="subtab-bar" data-subtab-bar="energy" role="tablist" aria-label="エネルギータブの表示切替">
+          <button type="button" class="subtab-btn active" data-subtab="selfsuff" role="tab" aria-selected="true">自給率</button>
+          <button type="button" class="subtab-btn" data-subtab="power" role="tab" aria-selected="false">発電と消費</button>
+        </div>
         <h3>エネルギー自給率の推移（一次エネルギー・年度・%）</h3>
         <p class="intl-sub">生活や経済活動に必要な一次エネルギー（石油・石炭・天然ガス・原子力・水力・再生可能エネルギーなど）のうち、国内で確保できる割合です。震災前は20%前後で推移していましたが、原子力発電所の停止で2014年度に過去最低の6.3%まで落ち込み、その後は再生可能エネルギーの拡大と原子力の再稼働で持ち直し、2024年度は16.3%まで戻っています。なお原子力は、燃料のウランを輸入するものの、IEAの方式で国産（準国産）に数えられているため、原子力を除くと自給率は数%台にとどまります（定義の詳細は末尾の注意書きにあります）。</p>
         <div class="hist-chart-wrap" id="selfSuffChartWrap"></div>
@@ -1970,6 +2060,7 @@
         <ul class="src-list">
           <li><span class="src-name">財務省「一般会計歳入歳出概算」各年度版（当初予算）</span><span class="src-use">一般会計の歳入と所管別歳出（2010年度・2015年度・2020年度・2025年度・2026年度）。令和8年度版は2025年12月26日閣議決定の当初予算で、その所管別内訳を使用。</span></li>
           <li><span class="src-name">財務省「租税及び印紙収入概算」各年度版（一般会計分・当初予算）</span><span class="src-use">税収の税目別内訳（消費税・所得税・法人税など）。年度ごとに切替表示。</span></li>
+          <li><span class="src-name">財務省「昭和54年度以降の税収の推移」（税収に関する資料）</span><span class="src-use">一般会計税収と所得税・法人税・消費税の決算額の推移。「税収の推移」セクション（1990年度〜2025年度・決算ベース）に使用。</span></li>
           <li><span class="src-name">財務省「国民負担率（対国民所得比）の推移」（令和8年度版）</span><span class="src-use">国民負担率の推移（1970年度〜2026年度）。国際比較タブの各国の国民負担率も同じ統計に基づく。</span></li>
           <li><span class="src-name">国立社会保障・人口問題研究所「社会保障費用統計」（各年度版および令和6年度版）</span><span class="src-use">部門別社会保障給付費（ILO基準）。年金・医療・福祉その他の推移（1990年度〜2024年度）に使用。</span></li>
         </ul>
@@ -3818,6 +3909,76 @@
           wrap.innerHTML = s;
         }
 
+        // ===== 税収の推移（1990年度〜2025年度・決算・静的表示） =====
+        // 財務省「昭和54年度以降の税収の推移」（税収に関する資料）の決算額。
+        // [年度, 税収総額, 所得税, 法人税, 消費税]（単位：億円）。その他＝総額−3税で算出する。
+        // 検算：1990年度 601,059（所得税259,955・法人税183,836・消費税46,227・その他111,041）、
+        // 2009年度 387,331（129,139・63,564・98,075・96,553）、2025年度 842,226（252,565・217,450・260,278・111,933）。
+        var TAXREV_DATA = [
+          [1990, 601059, 259955, 183836, 46227], [1991, 598204, 267493, 165951, 49763],
+          [1992, 544453, 232314, 137136, 52409], [1993, 541262, 236865, 121379, 55865],
+          [1994, 510300, 204175, 123631, 56315], [1995, 519308, 195151, 137354, 57901],
+          [1996, 520601, 189649, 144833, 60568], [1997, 539415, 191827, 134754, 93047],
+          [1998, 494319, 169961, 114232, 100744], [1999, 472345, 154468, 107951, 104471],
+          [2000, 507125, 187889, 117472, 98221], [2001, 479481, 178065, 102578, 97671],
+          [2002, 438332, 148122, 95234, 98115], [2003, 432824, 139146, 101152, 97128],
+          [2004, 455890, 146705, 114437, 99743], [2005, 490654, 155859, 132736, 105834],
+          [2006, 490691, 140541, 149179, 104633], [2007, 510182, 160800, 147444, 102719],
+          [2008, 442673, 149851, 100106, 99689], [2009, 387331, 129139, 63564, 98075],
+          [2010, 414868, 129844, 89677, 100333], [2011, 428326, 134762, 93514, 101946],
+          [2012, 439314, 139925, 97583, 103504], [2013, 469529, 155308, 104937, 108293],
+          [2014, 539707, 167902, 110316, 160290], [2015, 562854, 178071, 108274, 174263],
+          [2016, 554686, 176111, 103289, 172282], [2017, 587875, 188816, 119953, 175139],
+          [2018, 603564, 199006, 123180, 176809], [2019, 584415, 191707, 107971, 183527],
+          [2020, 608216, 191898, 112346, 209714], [2021, 670379, 213822, 136428, 218886],
+          [2022, 711374, 225217, 149398, 230793], [2023, 720761, 220530, 158606, 230923],
+          [2024, 752321, 212086, 179102, 250212], [2025, 842226, 252565, 217450, 260278]
+        ];
+        function renderTaxRev() {
+          var wrap = document.getElementById('taxRevChartWrap');
+          if (!wrap) return;
+          var W = 720, H = 320, L = 52, R = 10, T = 30, B = 36;
+          var PW = W - L - R, PH = H - T - B;
+          var VMAX = 900000; // 90兆円
+          function Y(v) { return T + (VMAX - v) / VMAX * PH; }
+          function fmtOku(v) { return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+          var n = TAXREV_DATA.length;
+          var slot = PW / n, bw = Math.min(13, slot * 0.68);
+          var ariaTxt = '一般会計税収（決算額）の推移を示す積み上げ棒グラフ。下から所得税・法人税・消費税・その他。1990年度は60.1兆円（所得税26.0兆円・法人税18.4兆円・消費税4.6兆円）でしたが、2009年度に38.7兆円まで落ち込み、2025年度は84.2兆円（消費税26.0兆円・所得税25.3兆円・法人税21.7兆円）で過去最高です';
+          var s = '<svg class="hist-svg taxrev-svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + ariaTxt + '">';
+          s += '<title>税収の推移（1990年度〜2025年度・決算額）</title>';
+          s += '<text class="axis-label" x="' + L + '" y="16">（兆円）</text>';
+          for (var g = 0; g <= 4; g++) {
+            var gv = g * 200000;
+            var gy = Y(gv);
+            s += '<line class="grid" x1="' + L + '" y1="' + gy.toFixed(1) + '" x2="' + (W - R) + '" y2="' + gy.toFixed(1) + '"/>';
+            s += '<text class="axis-label" x="' + (L - 8) + '" y="' + (gy + 4).toFixed(1) + '" text-anchor="end">' + (gv / 10000) + '</text>';
+          }
+          var labelYears = { 1990: 1, 2000: 1, 2009: 1, 2020: 1, 2025: 1 };
+          var xYears = { 1990: 1, 1995: 1, 2000: 1, 2005: 1, 2010: 1, 2015: 1, 2020: 1, 2025: 1 };
+          for (var i = 0; i < n; i++) {
+            var d = TAXREV_DATA[i];
+            var other = d[1] - d[2] - d[3] - d[4];
+            var cx = L + slot * i + slot / 2;
+            var x = (cx - bw / 2).toFixed(1);
+            var y0 = Y(0), yI = Y(d[2]), yC = Y(d[2] + d[3]), yV = Y(d[2] + d[3] + d[4]), yT = Y(d[1]);
+            function tip2(name, v) { return d[0] + '年度 ' + name + ' ' + fmtOku(v) + '億円（' + (v / d[1] * 100).toFixed(1) + '%）'; }
+            s += '<rect class="seg-inc" x="' + x + '" y="' + yI.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (y0 - yI).toFixed(1) + '"><title>' + tip2('所得税', d[2]) + '</title></rect>';
+            s += '<rect class="seg-corp" x="' + x + '" y="' + yC.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (yI - yC).toFixed(1) + '"><title>' + tip2('法人税', d[3]) + '</title></rect>';
+            s += '<rect class="seg-vat" x="' + x + '" y="' + yV.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (yC - yV).toFixed(1) + '"><title>' + tip2('消費税', d[4]) + '</title></rect>';
+            s += '<rect class="seg-other" x="' + x + '" y="' + yT.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (yV - yT).toFixed(1) + '"><title>' + tip2('その他', other) + '</title></rect>';
+            if (labelYears[d[0]]) {
+              s += '<text class="bar-total" x="' + cx.toFixed(1) + '" y="' + (yT - 6).toFixed(1) + '" text-anchor="middle">' + (d[1] / 10000).toFixed(1) + '</text>';
+            }
+            if (xYears[d[0]]) {
+              s += '<text class="year-label" x="' + cx.toFixed(1) + '" y="' + (H - 12) + '" text-anchor="middle">' + d[0] + '</text>';
+            }
+          }
+          s += '</svg>';
+          // このコンテナは税収の推移グラフ専用で、中の要素は作り直しても他に影響しない
+          wrap.innerHTML = s;
+        }
+
         // ===== 総人口の推移と将来推計（1970年〜2070年・静的表示） =====
         // 実績：総務省「国勢調査」（各年10月1日）および「人口推計」（2008年のピークと2024年）。
         // 推計：国立社会保障・人口問題研究所「日本の将来推計人口（令和5年推計）」出生中位・死亡中位仮定。
@@ -5023,6 +5184,7 @@
         renderBudget();
         renderBurden();
         renderBenefit();
+        renderTaxRev();
         renderPop();
         renderLabor();
         renderLaborRank();
@@ -5134,6 +5296,145 @@
 
         var intros = document.querySelectorAll('.rank-intro, .hist-intro, .vat-intro, .er-intro, .intl-intro, .age-rank-sub');
         for (var k = 0; k < intros.length; k++) setupDescToggle(intros[k], '説明', false);
+      })();
+    </script>
+    <script>
+      // ===== サブタブ（タブ内のセクション切替） =====
+      // 対象タブの先頭に置いたピル型ボタンで、選択したセクションだけを表示する。
+      // 切替は .subtab-off クラスの付け外しのみで、要素の再構築は一切しない。
+      // そのためグラフ（SVG）・入力値・説明欄の折りたたみ状態は切替後もそのまま残る。
+      // タブ末尾の「注意書き・出典」（.tab-notes）は対象に含めず、常時タブの一番下に残る。
+      // 単一セクション型（split）は、セクションの子要素を見出し（h3）や id を境にグループへ割り当て、
+      // 境より前の要素（見出し・導入文・年度セレクト等の共通部品）は常時表示にする。
+      // 説明欄の折りたたみが差し込んだ「説明」ボタン（.desc-toggle）は、直後の要素と同じグループに含める。
+      (function () {
+        var SPLIT_CONFIGS = [
+          { tab: 'pension', sectionId: 'pensionSection', markers: [
+            { id: 'penIntro', group: 'estimate' },
+            { text: '年金保険料と受給額の推移', group: 'history' }
+          ] },
+          { tab: 'budget', sectionId: 'budgetSection', markers: [
+            { text: '歳入（入ってくるお金）', group: 'main' },
+            { text: '税収の内訳（税目別）', group: 'tax' },
+            { text: '税収の推移（1990年度〜2025年度・決算）', group: 'taxhist' },
+            { text: '国民負担率の推移（1970年度〜2026年度）', group: 'burden' },
+            { text: '社会保障給付費の推移（1990年度〜2024年度）', group: 'benefit' },
+            { text: '歳出（使うお金・所管別）', group: 'main' }
+          ] },
+          { tab: 'pop', sectionId: 'popSection', markers: [
+            { text: '総人口の推移と将来推計（1970年〜2070年）', group: 'total' },
+            { text: '年齢3区分の構成と高齢化率', group: 'age' },
+            { text: '現役何人で高齢者1人を支えるか', group: 'support' }
+          ] },
+          { tab: 'labor', sectionId: 'laborSection', markers: [
+            { text: '産業別の残業時間の推移（2010年〜2025年）', group: 'overtime' },
+            { id: 'laborRankTitle', group: 'overtime' },
+            { id: 'salesRankTitle', group: 'sales' },
+            { id: 'salaryRankTitle', group: 'salary' },
+            { id: 'holidayRankTitle', group: 'holiday' }
+          ] },
+          { tab: 'politics', sectionId: 'politicsSection', markers: [
+            { text: '政党別議席数の推移（衆議院総選挙・1990年〜2024年）', group: 'seats' },
+            { text: '選挙ごとの政党別議席（年表）', group: 'seats' },
+            { id: 'subsidyTitle', group: 'subsidy' },
+            { id: 'subsidyTableTitle', group: 'subsidy' },
+            { text: '投票率の推移（衆議院総選挙・参議院通常選挙）', group: 'turnout' },
+            { text: '選挙ごとの投票率（表）', group: 'turnout' },
+            { text: '年代別投票率（2024年・第50回衆議院総選挙）', group: 'turnout' },
+            { text: '年代別投票率（表）', group: 'turnout' }
+          ] },
+          { tab: 'energy', sectionId: 'energySection', markers: [
+            { text: 'エネルギー自給率の推移（一次エネルギー・年度・%）', group: 'selfsuff' },
+            { text: '年度別のエネルギー自給率（表）', group: 'selfsuff' },
+            { text: '電源別発電電力量の推移（年度・億kWh）', group: 'power' },
+            { text: '年度別の発電電力量と構成比（表）', group: 'power' },
+            { text: '発電量と使われた量の差（ロス・所内消費など）', group: 'power' },
+            { text: '電気は何に使われたか（電力の最終消費・部門別）', group: 'power' },
+            { text: '年度別の電力消費量と構成比（部門別・表）', group: 'power' }
+          ] }
+        ];
+        // 複数セクション型（計算タブ）：セクション要素そのものをグループに割り当てる
+        var SECTION_GROUPS = {
+          calc: {
+            main: ['calcMainSection', 'calcStepsSection'],
+            vat: ['calcVatSection'],
+            employer: ['employerSection', 'selfNoEmployerSection'],
+            furusato: ['furusatoSection']
+          }
+        };
+        var assigned = {}; // tab -> [{el, group}]
+        function markerGroupFor(el, markers) {
+          for (var m = 0; m < markers.length; m++) {
+            var mk = markers[m];
+            if (mk.id && el.id === mk.id) return mk.group;
+            if (mk.text && el.tagName === 'H3' && el.textContent.replace(/\s+/g, '') === mk.text.replace(/\s+/g, '')) return mk.group;
+          }
+          return null;
+        }
+        for (var ci = 0; ci < SPLIT_CONFIGS.length; ci++) {
+          (function (cfg) {
+            var sec = document.getElementById(cfg.sectionId);
+            if (!sec) return;
+            var list = [];
+            var current = 'always';
+            var pendingToggles = [];
+            var kids = sec.children;
+            for (var i = 0; i < kids.length; i++) {
+              var el = kids[i];
+              if (el.hasAttribute('data-subtab-bar')) { list.push({ el: el, group: 'always' }); continue; }
+              if (el.classList.contains('desc-toggle')) { pendingToggles.push(el); continue; }
+              var g = markerGroupFor(el, cfg.markers);
+              if (g) current = g;
+              for (var p = 0; p < pendingToggles.length; p++) list.push({ el: pendingToggles[p], group: current });
+              pendingToggles = [];
+              list.push({ el: el, group: current });
+            }
+            for (var q = 0; q < pendingToggles.length; q++) list.push({ el: pendingToggles[q], group: current });
+            assigned[cfg.tab] = list;
+          })(SPLIT_CONFIGS[ci]);
+        }
+        for (var tabKey in SECTION_GROUPS) {
+          var list2 = [];
+          var groups = SECTION_GROUPS[tabKey];
+          for (var gk in groups) {
+            for (var ei = 0; ei < groups[gk].length; ei++) {
+              var secEl = document.getElementById(groups[gk][ei]);
+              if (secEl) list2.push({ el: secEl, group: gk });
+            }
+          }
+          assigned[tabKey] = list2;
+        }
+        function applySubtab(tab, selected) {
+          var list = assigned[tab];
+          if (!list) return;
+          for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            item.el.classList.toggle('subtab-off', item.group !== 'always' && item.group !== selected);
+          }
+        }
+        var bars = document.querySelectorAll('[data-subtab-bar]');
+        for (var bi = 0; bi < bars.length; bi++) {
+          (function (bar) {
+            var tab = bar.getAttribute('data-subtab-bar');
+            var btns = bar.querySelectorAll('.subtab-btn');
+            function select(btn) {
+              for (var j = 0; j < btns.length; j++) {
+                var on = btns[j] === btn;
+                btns[j].classList.toggle('active', on);
+                btns[j].setAttribute('aria-selected', on ? 'true' : 'false');
+              }
+              applySubtab(tab, btn.getAttribute('data-subtab'));
+            }
+            for (var b = 0; b < btns.length; b++) {
+              (function (btn) {
+                btn.addEventListener('click', function () { select(btn); });
+              })(btns[b]);
+            }
+            // 初期状態は先頭のサブタブ（HTML側で active のもの）を適用する
+            var initial = bar.querySelector('.subtab-btn.active') || btns[0];
+            if (initial) applySubtab(tab, initial.getAttribute('data-subtab'));
+          })(bars[bi]);
+        }
       })();
     </script>
   </body>
