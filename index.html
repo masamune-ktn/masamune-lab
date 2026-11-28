@@ -702,6 +702,7 @@
               <button type="button" class="side-sub-btn" data-side-subtab="sales" aria-selected="false">売上高</button>
               <button type="button" class="side-sub-btn" data-side-subtab="salary" aria-selected="false">平均年収</button>
               <button type="button" class="side-sub-btn" data-side-subtab="holiday" aria-selected="false">年間休日数</button>
+              <button type="button" class="side-sub-btn" data-side-subtab="minwage" aria-selected="false">最低賃金</button>
             </div>
             <button type="button" class="side-btn has-subs" data-target-tab="politics" data-cat="cat-data" role="tab" aria-selected="false" aria-expanded="false">政治</button>
             <div class="side-subs" data-side-subs="politics" hidden>
@@ -1791,13 +1792,14 @@
       </section>
 <section class="card intl" id="laborSection" data-tab="labor">
         <h2>労働・残業時間</h2>
-        <p class="intl-intro">仕事によって残業時間はどれだけ違うのか。厚生労働省「毎月勤労統計調査」の産業別・所定外労働時間（1人平均月間）で、2010年〜2025年の推移を見ます。このページの税金・年金の計算には影響しない、労働時間の長期統計です。</p>
+        <p class="intl-intro">仕事によって残業時間はどれだけ違うのか。厚生労働省「毎月勤労統計調査」の産業別・所定外労働時間（1人平均月間）で、2010年〜2025年の推移を見ます。このページの税金・年金の計算には影響しない、労働時間の長期統計です。「最低賃金」では、地域別最低賃金の全国加重平均の推移（2002年度〜2025年度）と、都道府県別の最新額（2025年度）を見ます。</p>
 
         <div class="subtab-bar" data-subtab-bar="labor" role="tablist" aria-label="労働タブの表示切替">
           <button type="button" class="subtab-btn active" data-subtab="overtime" role="tab" aria-selected="true">残業時間</button>
           <button type="button" class="subtab-btn" data-subtab="sales" role="tab" aria-selected="false">売上高</button>
           <button type="button" class="subtab-btn" data-subtab="salary" role="tab" aria-selected="false">平均年収</button>
           <button type="button" class="subtab-btn" data-subtab="holiday" role="tab" aria-selected="false">年間休日数</button>
+          <button type="button" class="subtab-btn" data-subtab="minwage" role="tab" aria-selected="false">最低賃金</button>
         </div>
         <h3>産業別の残業時間の推移（2010年〜2025年）</h3>
         <p class="intl-sub">「所定外労働時間」は、早出・残業・臨時の呼出・休日出勤など、所定の労働時間を超えて働いた時間で、公的統計でいう残業時間にあたります。事業所規模5人以上、一般労働者とパートタイム労働者を含む常用労働者（就業形態計）の1人平均月間です。産業を選ぶと、その産業の線（実線）と全産業平均＝調査産業計の線（破線）を重ねて比べられます。</p>
@@ -1910,8 +1912,29 @@
           <div class="hist-diff" id="holidayDiff">令和7年調査：全産業平均（調査産業計） <b>116.6日</b>／ 最も多い情報通信業 <b>123.2日</b>／ 最も少ない運輸業，郵便業 <b>107.6日</b></div>
         </div>
         <div id="holidayRankList" role="img" aria-label="令和7年調査の産業別年間休日数ランキング（労働者1人平均）"></div>
-        
-        
+
+
+        <h3 id="minwageTitle">最低賃金の推移（全国加重平均・2002年度〜2025年度）</h3>
+        <p class="intl-sub">最低賃金は都道府県ごとに決まる「地域別最低賃金」が基本です。ここでは、その全国加重平均（各都道府県の額を労働者数で加重した平均）の推移を見ます。2002年度の663円から上がり続け、2023年度に初めて1,000円を超え、2025年度は過去最大の+66円の引上げで1,121円になりました。特定の産業に適用される「特定（産業別）最低賃金」は対象に含みません。</p>
+        <div class="hist-ctl">
+          <div class="hist-diff" id="minwageDiff">2025年度：全国加重平均 <b>1,121円</b>（前年度比+66円・+6.3%、目安制度が始まって以降で最大の引上げ幅）／ 2002年度は663円で、23年間で約1.7倍</div>
+        </div>
+        <div class="hist-chart-wrap" id="minwageChartWrap"></div>
+        <table class="pen-table">
+          <thead>
+            <tr><th scope="col">年度</th><th scope="col">全国加重平均</th><th scope="col">前年度比</th><th scope="col">引上げ率</th></tr>
+          </thead>
+          <tbody id="minwageTableBody"></tbody>
+        </table>
+
+        <h3 id="minwagePrefTitle">都道府県別の最低賃金（2025年度・金額の高い順）</h3>
+        <p class="intl-sub">2025年度（令和7年度）の地域別最低賃金です。バーの長さは最も高い東京都を100%とした相対表示で、各行の右端は全国加重平均（1,121円）との差です。発効日は都道府県ごとに異なり、2025年10月1日から2026年3月31日までの間に順次発効します（最も早い栃木県は10月1日、最も遅い秋田県は2026年3月31日）。</p>
+        <div class="hist-ctl">
+          <div class="hist-diff" id="minwagePrefDiff">2025年度：最も高い東京都 <b>1,226円</b>／ 最も低い高知県・宮崎県・沖縄県 <b>1,023円</b>（最高額に対する最低額の比率は83.4%で、11年連続の改善。全47都道府県で初めて1,000円を超えました）</div>
+        </div>
+        <div id="minwagePrefList" role="img" aria-label="2025年度の都道府県別最低賃金ランキング"></div>
+
+
       </section>
 
       
@@ -1957,6 +1980,16 @@
           <li>最も多い情報通信業（123.2日）と最も少ない運輸業，郵便業（107.6日）では15.6日の差があります。上の残業時間ランキングで最も残業が長かったのも運輸業，郵便業で、「休みが少なく、残業は長い」産業だと言えます。</li>
         </ul>
 <p class="intl-src">出典：厚生労働省「就労条件総合調査」令和7年調査 第7表（産業・企業規模、年間休日総数階級別適用労働者割合及び労働者1人平均年間休日総数）。企業規模別の値は同調査 第4表・第7表、年次有給休暇の付与・取得日数は同調査結果の概況（第5表）によります。産業分類は日本標準産業分類に基づきます。</p>
+        <h3 class="notes-h3">最低賃金の推移について</h3>
+<ul class="intl-points">
+          <li>ここで扱うのは都道府県ごとに決まる<b>地域別最低賃金</b>です。特定の産業に適用される<b>特定（産業別）最低賃金は対象外</b>です（特定最低賃金は、地域別最低賃金を下回るものを除き、令和7年3月末現在で全国134件が設定されています）。</li>
+          <li><b>全国加重平均</b>は、47都道府県の額を単純に平均したものではなく、各都道府県の<b>労働者数で加重した平均</b>です。働く人の多い東京都（1,226円）など金額の高い地域の額が強く反映されるため、単純平均より高く出ます。</li>
+          <li>2020年度はコロナ禍で中央最低賃金審議会が引上げ額の目安を示さず、引上げは<b>+1円</b>にとどまりました。その後は+28円（2021年度）、+31円、+43円、+51円と加速し、2025年度は<b>+66円</b>と、昭和53年度に目安制度が始まって以降で最大の引上げ幅になりました。</li>
+          <li>2025年度は<b>全47都道府県で初めて1,000円を超えました</b>。最高額（東京都1,226円）に対する最低額（高知県・宮崎県・沖縄県1,023円）の比率は83.4%で、地域間格差は11年連続で改善しています。</li>
+          <li>都道府県別の額の<b>発効日は都道府県ごとに異なります</b>。2025年度は2025年10月1日（栃木県）から2026年3月31日（秋田県）までの間に順次発効するため、年度の途中では新旧の額が混在する期間があります。このページの都道府県別一覧は、各都道府県の改定後の額（答申額）です。</li>
+          <li>政府は「2020年代に全国平均1,500円」という目標を掲げています（経済財政運営と改革の基本方針2025）。このページの推移は、その達成状況を見る目安にもなります。</li>
+        </ul>
+<p class="intl-src">出典：厚生労働省「令和7年度地域別最低賃金額答申」（2025年9月5日公表、別紙「令和7年度 地域別最低賃金 答申状況」を含む）および同省資料「地域別最低賃金額の推移（全国加重平均）」（全国厚生労働関係部局長会議資料ほか）。金額はいずれも時間額です。</p>
       </section>
 <section class="card intl" id="politicsSection" data-tab="politics">
         <h2>政治・政党別議席数、政党交付金と投票率</h2>
@@ -2597,6 +2630,7 @@
           <li><span class="src-name">財務省「年次別法人企業統計調査 結果の概要」各年度版 第1表</span><span class="src-use">産業別の売上高（2015年度・2020年度・2024年度）。金額は億円単位の公表値を兆円に換算して表示。</span></li>
           <li><span class="src-name">国税庁「民間給与実態統計調査」各年分 第8表および調査結果報告</span><span class="src-use">業種別の平均給与（2019年分・2024年分）。金額は千円単位の公表値を万円に換算して表示。</span></li>
           <li><span class="src-name">厚生労働省「就労条件総合調査」令和7年調査 第7表（結果の概況 第4表・第5表を含む）</span><span class="src-use">産業別の年間休日総数（労働者1人平均、令和6年1年間の実績）。調査対象は常用労働者30人以上の民営企業。産業分類は日本標準産業分類に基づく。</span></li>
+          <li><span class="src-name">厚生労働省「令和7年度地域別最低賃金額答申」・同省資料「地域別最低賃金額の推移（全国加重平均）」</span><span class="src-use">地域別最低賃金の全国加重平均の推移（2002年度663円〜2025年度1,121円）と、2025年度の都道府県別改定額（最高は東京都1,226円、最低は高知県・宮崎県・沖縄県1,023円、発効日は都道府県により異なる）。金額はいずれも時間額。特定（産業別）最低賃金は含まない。</span></li>
         </ul>
 
         <h3>政治タブ</h3>
@@ -5020,6 +5054,119 @@
           }
         }
 
+        // ===== 労働：最低賃金の推移（全国加重平均）と都道府県別（2025年度） =====
+        // 出典：厚生労働省の公表資料。全国加重平均の長期系列は同省資料「地域別最低賃金額の推移
+        // （全国加重平均）」（全国厚生労働関係部局長会議資料ほか）で、都道府県別は
+        // 「令和7年度地域別最低賃金額答申」（2025年9月5日公表）の改定額で照合した。
+        // 金額はいずれも時間額。特定（産業別）最低賃金は含まない。
+        var MINWAGE_YEARS = [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+        var MINWAGE_AVG = [663, 664, 665, 668, 673, 687, 703, 713, 730, 737, 749, 764, 780, 798, 823, 848, 874, 901, 902, 930, 961, 1004, 1055, 1121];
+        var MINWAGE_PREF_AVG = 1121;
+        var MINWAGE_PREFS = [
+          ['北海道', 1075], ['青森県', 1029], ['岩手県', 1031], ['宮城県', 1038], ['秋田県', 1031],
+          ['山形県', 1032], ['福島県', 1033], ['茨城県', 1074], ['栃木県', 1068], ['群馬県', 1063],
+          ['埼玉県', 1141], ['千葉県', 1140], ['東京都', 1226], ['神奈川県', 1225], ['新潟県', 1050],
+          ['富山県', 1062], ['石川県', 1054], ['福井県', 1053], ['山梨県', 1052], ['長野県', 1061],
+          ['岐阜県', 1065], ['静岡県', 1097], ['愛知県', 1140], ['三重県', 1087], ['滋賀県', 1080],
+          ['京都府', 1122], ['大阪府', 1177], ['兵庫県', 1116], ['奈良県', 1051], ['和歌山県', 1045],
+          ['鳥取県', 1030], ['島根県', 1033], ['岡山県', 1047], ['広島県', 1085], ['山口県', 1043],
+          ['徳島県', 1046], ['香川県', 1036], ['愛媛県', 1033], ['高知県', 1023], ['福岡県', 1057],
+          ['佐賀県', 1030], ['長崎県', 1031], ['熊本県', 1034], ['大分県', 1035], ['宮崎県', 1023],
+          ['鹿児島県', 1026], ['沖縄県', 1023]
+        ];
+        function renderMinwage() {
+          var wrap = document.getElementById('minwageChartWrap');
+          if (!wrap) return;
+          function comma(v) { return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+          var W = 720, H = 320, L = 52, R = 16, T = 44, B = 38;
+          var PW = W - L - R, PH = H - T - B;
+          var VMIN = 600, VMAX = 1150;
+          function X(year) { return L + (year - 2002) / (2025 - 2002) * PW; }
+          function Y(v) { return T + (VMAX - v) / (VMAX - VMIN) * PH; }
+          var pts = [];
+          for (var i = 0; i < MINWAGE_YEARS.length; i++) pts.push(X(MINWAGE_YEARS[i]).toFixed(1) + ',' + Y(MINWAGE_AVG[i]).toFixed(1));
+          var ariaTxt = '地域別最低賃金の全国加重平均額の推移グラフ。2002年度663円から上がり続け、2020年度は902円（前年度比+1円）、2023年度に1,004円と初めて1,000円を超え、2025年度は1,121円です';
+          var s = '<svg class="hist-svg labor-svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + ariaTxt + '">';
+          s += '<title>最低賃金の推移（全国加重平均・2002年度〜2025年度）</title>';
+          s += '<text class="axis-label" x="' + L + '" y="16">（円／時間）</text>';
+          for (var g = 0; g <= 5; g++) {
+            var gv = 600 + g * 100;
+            var gy = Y(gv);
+            s += '<line class="grid" x1="' + L + '" y1="' + gy.toFixed(1) + '" x2="' + (W - R) + '" y2="' + gy.toFixed(1) + '"/>';
+            s += '<text class="axis-label" x="' + (L - 8) + '" y="' + (gy + 4).toFixed(1) + '" text-anchor="end">' + comma(gv) + '</text>';
+          }
+          s += '<polyline class="line-sel" points="' + pts.join(' ') + '"/>';
+          for (var xi = 0; xi < MINWAGE_YEARS.length; xi++) {
+            if (MINWAGE_YEARS[xi] % 5 === 0 || MINWAGE_YEARS[xi] === 2025) {
+              s += '<text class="year-label" x="' + X(MINWAGE_YEARS[xi]).toFixed(1) + '" y="' + (H - 14) + '" text-anchor="middle">' + MINWAGE_YEARS[xi] + '</text>';
+            }
+          }
+          for (var pi = 0; pi < MINWAGE_YEARS.length; pi++) {
+            s += '<circle cx="' + X(MINWAGE_YEARS[pi]).toFixed(1) + '" cy="' + Y(MINWAGE_AVG[pi]).toFixed(1) + '" r="5" fill="transparent"><title>' + MINWAGE_YEARS[pi] + '年度 全国加重平均 ' + comma(MINWAGE_AVG[pi]) + '円</title></circle>';
+          }
+          // 注釈：最初・1,000円超え（2023年度）・最新
+          var i23 = MINWAGE_YEARS.indexOf(2023);
+          s += '<circle class="anno-dot" cx="' + X(2002).toFixed(1) + '" cy="' + Y(MINWAGE_AVG[0]).toFixed(1) + '" r="5"/>';
+          s += '<text class="anno" x="' + X(2002).toFixed(1) + '" y="' + (Y(MINWAGE_AVG[0]) - 10).toFixed(1) + '" text-anchor="start">2002年度 ' + comma(MINWAGE_AVG[0]) + '円</text>';
+          s += '<circle class="anno-dot" cx="' + X(2023).toFixed(1) + '" cy="' + Y(MINWAGE_AVG[i23]).toFixed(1) + '" r="5"/>';
+          s += '<text class="anno" x="' + X(2023).toFixed(1) + '" y="' + (Y(MINWAGE_AVG[i23]) - 10).toFixed(1) + '" text-anchor="middle">2023年度 ' + comma(MINWAGE_AVG[i23]) + '円</text>';
+          s += '<circle class="anno-dot" cx="' + X(2025).toFixed(1) + '" cy="' + Y(MINWAGE_AVG[MINWAGE_AVG.length - 1]).toFixed(1) + '" r="5"/>';
+          s += '<text class="anno" x="' + X(2025).toFixed(1) + '" y="' + (Y(MINWAGE_AVG[MINWAGE_AVG.length - 1]) - 10).toFixed(1) + '" text-anchor="end">2025年度 ' + comma(MINWAGE_AVG[MINWAGE_AVG.length - 1]) + '円</text>';
+          s += '</svg>';
+          // このコンテナは最低賃金グラフ専用で、中の要素は作り直しても他に影響しない
+          wrap.innerHTML = s;
+          var tbody = document.getElementById('minwageTableBody');
+          if (tbody) {
+            var th = '';
+            for (var ti = 0; ti < MINWAGE_YEARS.length; ti++) {
+              var diffTxt = '―', rateTxt = '―';
+              if (ti > 0) {
+                var d = MINWAGE_AVG[ti] - MINWAGE_AVG[ti - 1];
+                diffTxt = '+' + d + '円';
+                rateTxt = '+' + (d / MINWAGE_AVG[ti - 1] * 100).toFixed(1) + '%';
+              }
+              th += '<tr><td>' + MINWAGE_YEARS[ti] + '年度</td><td class="num">' + comma(MINWAGE_AVG[ti]) + '円</td><td class="num">' + diffTxt + '</td><td class="num">' + rateTxt + '</td></tr>';
+            }
+            // この tbody は最低賃金の推移表専用で、中の要素は作り直しても他に影響しない
+            tbody.innerHTML = th;
+          }
+          var list = document.getElementById('minwagePrefList');
+          if (list) {
+            var rows = MINWAGE_PREFS.slice().sort(function (a, b) { return b[1] - a[1]; });
+            var maxVal = rows.length ? rows[0][1] : 1;
+            var display = [];
+            var rank = 0;
+            var insertedAvg = false;
+            for (var ri = 0; ri < rows.length; ri++) {
+              if (!insertedAvg && rows[ri][1] < MINWAGE_PREF_AVG) {
+                display.push({ name: '全国加重平均', val: MINWAGE_PREF_AVG, isAvg: true, rank: 0 });
+                insertedAvg = true;
+              }
+              rank++;
+              display.push({ name: rows[ri][0], val: rows[ri][1], isAvg: false, rank: rank });
+            }
+            if (!insertedAvg) display.push({ name: '全国加重平均', val: MINWAGE_PREF_AVG, isAvg: true, rank: 0 });
+            var html = '';
+            var ariaParts = [];
+            for (var j = 0; j < display.length; j++) {
+              var dd = display[j];
+              var w = (dd.val / maxVal * 100).toFixed(1);
+              var df = dd.val - MINWAGE_PREF_AVG;
+              var dTxt = dd.isAvg ? '平均' : ('平均 ' + (df > 0 ? '+' : (df < 0 ? '−' : '±')) + Math.abs(df) + '円');
+              html += '<div class="labor-rank-row' + (dd.isAvg ? ' avg' : '') + '">'
+                + '<span class="lrank num">' + (dd.isAvg ? '―' : dd.rank + '位') + '</span>'
+                + '<span class="lname">' + dd.name + '</span>'
+                + '<div class="labor-track"><div style="width:' + w + '%"></div></div>'
+                + '<span class="lval num">' + comma(dd.val) + '円</span>'
+                + '<span class="ldiff num">' + dTxt + '</span></div>';
+              ariaParts.push(dd.name + comma(dd.val) + '円');
+            }
+            // このコンテナは都道府県別最低賃金ランキング専用で、中の要素は作り直しても他に影響しない
+            list.innerHTML = html;
+            list.setAttribute('aria-label', '2025年度の都道府県別最低賃金（地域別最低賃金・時間額）のランキング。' + ariaParts.join('、') + 'の順です');
+          }
+        }
+
         function renderLabor() {
           var wrap = document.getElementById('laborChartWrap');
           if (!wrap) return;
@@ -5892,6 +6039,7 @@
         renderSalesRank();
         renderSalaryRank();
         renderHolidayRank();
+        renderMinwage();
         renderSeats();
         renderSubsidy();
         renderTurnout();
@@ -6032,7 +6180,9 @@
             { id: 'laborRankTitle', group: 'overtime' },
             { id: 'salesRankTitle', group: 'sales' },
             { id: 'salaryRankTitle', group: 'salary' },
-            { id: 'holidayRankTitle', group: 'holiday' }
+            { id: 'holidayRankTitle', group: 'holiday' },
+            { id: 'minwageTitle', group: 'minwage' },
+            { id: 'minwagePrefTitle', group: 'minwage' }
           ] },
           { tab: 'politics', sectionId: 'politicsSection', markers: [
             { text: '政党別議席数の推移（衆議院総選挙・1990年〜2024年）', group: 'seats' },
